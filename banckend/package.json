@@ -1,0 +1,30 @@
+{
+  "name": "banckend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "nodemon": "^3.1.14"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+    "scripts": {
+    "dev": "bun --watch index.js"
+  },
+  
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.3",
+    "multer": "^2.1.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "openai": "^6.42.0"
+  }
+}
