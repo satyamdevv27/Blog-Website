@@ -4,13 +4,13 @@ import blogmodel from "../models/blogmodel.js";
 export const getallblog = async (req, res) => {
   try {
     const allblog = await blogmodel.find({
-      author: req.user.id,
+      author: req.user._id,
     });
 
     if (allblog.length === 0) {
-      // Use 404 Not Found for missing collection content
+   
       return res
-        .status(404)
+        .status(200)
         .json({ message: "No blogs found in the database" });
     }
     res.status(201).json(allblog);
@@ -25,18 +25,13 @@ export const create_blog = async (req, res) => {
       title,
       content,
       coverImage,
-      author,
       category,
       tags,
       status,
       views,
       summary,
     } = req.body;
-    console.log("Logged in user:", req.user);
 
-    console.log("User ID:", req.user._id);
-
-    console.log(author);
     
 
     const newblog = await blogmodel.create({
@@ -61,14 +56,23 @@ export const create_blog = async (req, res) => {
 export const update_blog = async (req, res) => {
   try {
     const { id } = req.params;
-    const updateblog = await blogmodel.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!updateblog) {
-      res.status(404).json({ message: "Blog not found" });
+    const updateblog = await blogmodel.findOneAndUpdate({
+      _id:id,
+      author:req.user._id
+    },
+    req.body,
+    {
+      returnDocument: "after",
+      runValidators:true
     }
-    res.status(201).json({ message: "blog updated sucessfully" });
+  );
+    if (!updateblog) {
+     return res.status(404).json({ message: "Blog not found" });
+    }
+   res.status(200).json({
+   success:true,
+   blog:updateblog
+});
   } catch (error) {
     res.status(401).json({ message: "update failed", error: error.message });
   }
@@ -77,10 +81,13 @@ export const update_blog = async (req, res) => {
 export const delete_blog = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteblog = await blogmodel.findByIdAndDelete(id);
+    const deleteblog = await blogmodel.findOneAndDelete({
+      _id:id,
+      author:req.user._id
+    });
 
     if (!deleteblog) {
-      res.status(401).json({ message: "blog not found" });
+      res.status(404).json({ message: "blog not found" });
     }
     res.status(201).json({ message: "blog deleted sucessfully" });
   } catch (error) {
