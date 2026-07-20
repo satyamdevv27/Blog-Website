@@ -1,14 +1,15 @@
-function Home() {
-  return (
-    <div className="h-screen w-full bg-red-500">
-    <div className="w-full bg-white">
-        <h1>INKAI</h1>
-        <nav>
-            
-        </nav>
-    </div>
-    </div>
-  )
-}
+import Navbar from "../component/navbar component/Navbar";
 
-export default Home
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+
+      <div className="max-w-7xl mx-auto p-6">
+        <h1 className="text-5xl font-serif mt-16">
+          Home Page
+        </h1>
+      </div>
+    </>
+  );
+}
