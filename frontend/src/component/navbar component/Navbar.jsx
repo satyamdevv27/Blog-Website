@@ -55,7 +55,7 @@ export default function Navbar() {
 
           {token ? (
             <>
-              <button>Write</button>
+              <Link to="/write">Write</Link>
 
               <span>{user?.userName}</span>
             </>
