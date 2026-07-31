@@ -17,4 +17,6 @@ setCategory:(category)=>(set({category})),
 setTags:(tags)=>(set({tags})),
 setCoverImage: (coverImage) => set({ coverImage }),
 setStatus:(status)=>(set({status})),
+
+
 }))
