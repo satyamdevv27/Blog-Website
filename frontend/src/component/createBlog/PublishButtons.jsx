@@ -2,9 +2,21 @@ import axios from "axios";
 import { useBlogStore } from "../../store/blogStore";
 
 export default function PublishButtons() {
-  const { title, summary, content, category, tags, coverImage, status , setTitle , setSummary,setContent,setCategory,setTags } =
-    useBlogStore();
-  const submitblog = async() => {
+  const {
+    title,
+    summary,
+    content,
+    category,
+    tags,
+    coverImage,
+    status,
+    setTitle,
+    setSummary,
+    setContent,
+    setCategory,
+    setTags,
+  } = useBlogStore();
+  const submitblog = async () => {
     let token = localStorage.getItem("token");
     const blogdata = {
       title,
@@ -18,19 +30,23 @@ export default function PublishButtons() {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/createblog",
-        blogdata,
+        {
+          ...blogdata,
+          status: "published",
+        },
+
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         },
       );
-      setTitle("")
-      setSummary("")
-      setContent("")
-      setCategory("")
-      setTags([])
-      
+      setTitle("");
+      setSummary("");
+      setContent("");
+      setCategory("");
+      setTags([]);
+
       console.log(response);
     } catch (error) {
       console.log(error);
