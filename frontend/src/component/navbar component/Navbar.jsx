@@ -57,7 +57,7 @@ export default function Navbar() {
             <>
               <Link to="/write">Write</Link>
 
-              <span>{user?.userName}</span>
+              <Link to="/userprofile"><span>{user?.userName}</span></Link>
             </>
           ) : (
             <>
