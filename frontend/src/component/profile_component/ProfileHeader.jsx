@@ -1,6 +1,7 @@
 import ProfileStats from "./ProfileStats";
 
 export default function ProfileHeader() {
+const user = JSON.parse(localStorage.getItem("user"));
   return (
     <div className="border-b border-zinc-800 pb-10">
 
@@ -15,7 +16,7 @@ export default function ProfileHeader() {
         <div className="flex-1">
 
           <h1 className="text-4xl font-bold">
-            Satyam Verma
+             {user.userName}
           </h1>
 
           <p className="text-zinc-400 mt-3">
