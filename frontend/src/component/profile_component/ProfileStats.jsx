@@ -1,10 +1,14 @@
+import { useFetchblog } from "../../store/fetchblogstore";
+
 export default function ProfileStats() {
+  const publishedblog = useFetchblog((state)=>state.publishedblogs)
+  const draftblog = useFetchblog((state)=>state.draftblogs)
   return (
     <div className="flex gap-10 mt-8">
 
       <div>
         <h2 className="text-2xl font-bold">
-          12
+          {publishedblog.length}
         </h2>
 
         <p className="text-zinc-400">
@@ -14,7 +18,7 @@ export default function ProfileStats() {
 
       <div>
         <h2 className="text-2xl font-bold">
-          4
+          {draftblog.length}
         </h2>
 
         <p className="text-zinc-400">

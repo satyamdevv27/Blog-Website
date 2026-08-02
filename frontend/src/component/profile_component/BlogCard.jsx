@@ -1,4 +1,4 @@
-export default function BlogCard() {
+export default function BlogCard({blog}) {
   return (
     <div className="bg-zinc-900 rounded-2xl overflow-hidden hover:scale-[1.02] transition">
 
@@ -11,23 +11,22 @@ export default function BlogCard() {
       <div className="p-5">
 
         <h2 className="text-xl font-bold">
-          Building a Blog using MERN
+          {blog.title}
         </h2>
 
         <p className="text-zinc-400 mt-2 text-sm">
-          Learn how to build a full stack blogging platform using React, Node,
-          Express and MongoDB.
+          {blog.summary}
         </p>
 
         <div className="flex justify-between items-center mt-5">
 
           <span className="bg-indigo-600 px-3 py-1 rounded-full text-sm">
-            Programming
+            {blog.category}
           </span>
 
-          <span className="text-zinc-400">
+          {/* <span className="text-zinc-400">
             👁 245
-          </span>
+          </span> */}
 
         </div>
 

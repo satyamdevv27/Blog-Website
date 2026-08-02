@@ -1,57 +1,32 @@
-import axios from"axios"
+import { useFetchblog } from "../store/fetchblogstore";
 import ProfileHeader from "../component/profile_component/ProfileHeader";
 import ProfileTabs from "../component/profile_component/ProfileTabs";
 import BlogGrid from "../component/profile_component/BlogGrid";
 import { useEffect, useState } from "react";
 
 export default function Profile() {
-  const [blogs,setbolgs] = useState([])
+  const [isactivetab , setisactivetab] = useState("published")
 
-useEffect(()=>{
-  const getallblog=async()=>{
-
-    try {
-      const token = localStorage.getItem("token");
-
-const response = await axios.get(
-  "http://localhost:5000/api/getallblog",
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
+  const fetchblogs = useFetchblog((state)=>state.fetchblog)
+ useEffect(()=>{
+  fetchblogs()
+ },[])
 
 
-
-setbolgs(response.data)
-console.log(blogs);
-
-    } catch (error) {
-      console.log(error);
-      
-    }
-
-  }
-
-getallblog()
-},[])
-
-
-
+ 
   return (
     <section className="min-h-screen bg-zinc-950 text-white">
-
       <div className="max-w-6xl mx-auto px-5 py-10">
+        <ProfileHeader/>
 
-        <ProfileHeader />
+        <ProfileTabs
+        isactivetab={isactivetab}
+        setisactivetab={setisactivetab}
 
-        <ProfileTabs />
+        />
 
-        <BlogGrid />
-
+        <BlogGrid isactivetab={isactivetab} />
       </div>
-
     </section>
   );
 }

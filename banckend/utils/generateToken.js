@@ -5,7 +5,7 @@ const generateToken = (id) => {
     { id },                 // Payload
     process.env.JWT_SECRET, // Secret Key
     {
-      expiresIn: "1d",
+      expiresIn: "30d",
     }
   );
 };
